@@ -1,0 +1,78 @@
+# Display log nicely - require ccze package
+seelog()
+{
+    tail -f $1 | ccze
+}
+
+# Find a file with a pattern in name
+function ff() 
+{ 
+    find . -type f -iname '*'$*'*' -ls ;
+}
+
+# Handy Extract Program. Based on extension (oh no! :) )
+function extract()
+{
+     if [ -f $1 ] ; then
+         case $1 in
+             *.tar.bz2)   tar xvjf $1     ;;
+             *.tar.gz)    tar xvzf $1     ;;
+             *.bz2)       bunzip2 $1      ;;
+             *.rar)       unrar x $1      ;;
+             *.gz)        gunzip $1       ;;
+             *.tar)       tar xvf $1      ;;
+             *.tbz2)      tar xvjf $1     ;;
+             *.tgz)       tar xvzf $1     ;;
+             *.zip)       unzip $1        ;;
+             *.Z)         uncompress $1   ;;
+             *.7z)        7z x $1         ;;
+             *)           echo "'$1' cannot be extracted via >extract<" ;;
+         esac
+     else
+         echo "'$1' is not a valid file"
+     fi
+}
+
+# Switcher 2 noms de fichiers
+function swap()
+{
+    local TMPFILE=tmp.$$
+    mv "$1" $TMPFILE
+    mv "$2" "$1"
+    mv $TMPFILE "$2"
+}
+
+# completion
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+else
+    . $TILAPDIR/bashrc/bash_completion
+fi
+
+shopt -s extglob      	# Necessary,
+set +o nounset          # otherwise some completions will fail.
+complete -A hostname   rsh rcp telnet rlogin r ftp ping disk
+complete -A export     printenv
+complete -A variable   export local readonly unset
+complete -A enabled    builtin
+complete -A alias      alias unalias
+complete -A function   function
+complete -A user       su mail finger
+complete -A helptopic  help     # Currently, same as builtins.
+complete -A shopt      shopt
+complete -A stopped -P '%' bg
+complete -A job -P '%'     fg jobs disown
+complete -A directory  mkdir rmdir
+complete -A directory   -o default cd
+
+# Compression
+complete -f -o default -X '*.+(zip|ZIP)'  zip
+complete -f -o default -X '!*.+(zip|ZIP)' unzip
+complete -f -o default -X '*.+(z|Z)'      compress
+complete -f -o default -X '!*.+(z|Z)'     uncompress
+complete -f -o default -X '*.+(gz|GZ)'    gzip
+complete -f -o default -X '!*.+(gz|GZ)'   gunzip
+complete -f -o default -X '*.+(bz2|BZ2)'  bzip2
+complete -f -o default -X '!*.+(bz2|BZ2)' bunzip2
+complete -f -o default -X '!*.+(zip|ZIP|z|Z|gz|GZ|bz2|BZ2)' extract
+

@@ -1,0 +1,62 @@
+[user]
+    name = Julien Tilap LA VINH
+    email = jlavinh@gmail.com
+[github]
+    user = tilap
+    token = my_token
+[url "https://"]
+    insteadOf = git://
+[help]
+    autocorrect = 1
+[core]
+    editor = vim
+[alias]
+    # Stupid
+    co = checkout
+    ls = branch -a
+    save = stash save
+    pop = stash pop --index
+
+    # See logs
+    lol = log --oneline --decorate --graph -n 15
+    lola = log --oneline --decorate --graph -n 15 --all
+
+    # lazy short command
+    st = status
+
+    # Display commiters list with commit count
+    who = shortlog -sne
+    
+    # Fast repo statement
+    changes = diff --name-status
+    dic = diff --cached
+    diffstat = diff --stat
+
+    # Edit the last commit comment
+    amend = commit --amend
+
+    # Cancel the last commit
+    undo = reset --soft HEAD^
+
+    # Sumup
+    oneline = log --pretty=oneline --abbrev-commit --graph
+
+    # Changes since last pull
+    lc = !git oneline ORIG_HEAD.. --stat --no-merges
+
+    # Fast file add
+    addm = !git-ls-files -m -z | xargs -0 git-add && git status
+    addu = !git-ls-files -o --exclude-standard -z | xargs -0 git-add && git status
+    rmm = !git ls-files -d -z | xargs -0 git-rm && git status
+
+    graph = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset)\t%C(bold green)%d%C(reset) %C(white)%s%C(reset) - %C(bold white)%an%C(reset) %C(bold yellow)(%ar)%C(reset)' --all
+    hist = log --pretty=format:\"%C(bold blue)%h%C(reset) %C(bold yellow)%ad%C(reset) | %s%C(bold green)%d%C(reset) %C(bold white)[%an]%C(reset)\" --graph --date=short
+    latest = log --oneline -n 15
+
+[color "status"]
+  added = blue 
+  changed = yellow 
+  untracked = white ul
+
+[push]
+	default = simple
