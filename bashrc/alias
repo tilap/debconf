@@ -41,3 +41,5 @@ alias h='history'
 alias du='du -h --max-depth=1'
 alias dusort='du -x --block-size=1048576 | sort -nr'
 alias df='df -h'
+
+alias gitb='git branch -vv --color=always | while read; do echo -e $(git log -1 --format=%ci $(echo "_$REPLY" | awk \'{print $2}\' | perl -pe \'s/\e\[?.*?[\@-~]//g\') 2> /dev/null || git log -1 --format=%ci)" $REPLY"; done | sort -r | cut -d \' \' -f -1,4-'
