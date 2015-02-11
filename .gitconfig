@@ -4,6 +4,8 @@
 [github]
     user = tilap
     token = my_token
+[credential]
+    helper = cache --timeout=86400
 [url "https://"]
     insteadOf = git://
 [help]
@@ -51,8 +53,8 @@
 
     graph = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset)\t%C(bold green)%d%C(reset) %C(white)%s%C(reset) - %C(bold white)%an%C(reset) %C(bold yellow)(%ar)%C(reset)' --all
     hist = log --pretty=format:\"%C(bold blue)%h%C(reset) %C(bold yellow)%ad%C(reset) | %s%C(bold green)%d%C(reset) %C(bold white)[%an]%C(reset)\" --graph --date=short
-    latest = log --oneline -n 15
 
+    b = for-each-ref --sort=-committerdate refs/heads/ --format="%(authordate:short)%09%(objectname:short)%09%1B[0;33m%(refname:short)%1B[m%09"
 [color "status"]
   added = blue 
   changed = yellow 
