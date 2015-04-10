@@ -51,7 +51,7 @@ And improve bash completion
 
 ```
 cd
-ln -s TILAPDIR/bashrc/.bash_logout .bash_logout
+ln -s $TILAPDIR/bashrc/.bash_logout .bash_logout
 ```
 
 ### Feature
@@ -64,7 +64,7 @@ Will clear your screen for your privacy
 
 ```
 cd
-ln -s TILAPDIR/.vimrc .vimrc
+ln -s $TILAPDIR/.vimrc .vimrc
 ```
 
 ### Features
@@ -80,5 +80,5 @@ Comes with basic user config, shortcuts and colors.
 
 ```
 cd
-ln -s TILAPDIR/.gitconfig .gitconfig
+ln -s $TILAPDIR/.gitconfig .gitconfig
 ```
